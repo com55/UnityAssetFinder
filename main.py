@@ -336,8 +336,8 @@ class SearchOptionsWidget(QWidget):
 class FindAssetFileApp(QWidget):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("Find Asset File")
-        self.settings = QSettings("com55", "FindAssetFileApp")
+        self.setWindowTitle("Unity Asset Finder")
+        self.settings = QSettings("com55", "UnityAssetFinderApp")
         self.last_copy_dir = ""
         self.worker = None
         self.worker_thread = None
