@@ -25,9 +25,9 @@ The app scans files with UnityPy and provides a simple PySide6 GUI to:
 ## Quick Start (Windows Recommended)
 
 Run the launcher script:
-
+```bash
   run.cmd
-
+```
 What this does automatically:
 - detects Python or uv
 - creates/reuses .venv when needed
@@ -47,25 +47,18 @@ Use this only if you do not want to use run.cmd.
   - UnityPy==1.23.0
   - PySide6==6.11.0
 
-### Install
+### Install & Run
 
 Option 1: pip
-
+```bash
   pip install -r requirements.txt
-
-Option 2: uv
-
-  uv pip install -r requirements.txt
-
-### Run
-
-Option 1: python
-
   python main.py
-
+```
 Option 2: uv
-
+```bash
+  uv pip install -r requirements.txt
   uv run main.py
+```
 
 ## How To Use
 
