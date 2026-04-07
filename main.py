@@ -12,7 +12,7 @@ from PySide6.QtWidgets import (
     QLineEdit, QPushButton, QCheckBox, QLabel, QFileDialog, QProgressBar,
     QListWidget, QListWidgetItem, QToolButton, QGroupBox, QMessageBox, QComboBox
 )
-from PySide6.QtCore import QLocale, QThread, QObject, Signal, QSettings, Qt, QSize, QEvent
+from PySide6.QtCore import QLocale, QThread, QObject, Signal, QSettings, Qt, QSize, QEvent, QUrl
 from PySide6.QtGui import QIcon, QDesktopServices, QGuiApplication
 
 class ResultItemWidget(QWidget):
@@ -60,9 +60,22 @@ class ResultItemWidget(QWidget):
             if event.type() == QEvent.Type.MouseButtonPress:
                 self.widgetClicked.emit()
             elif event.type() == QEvent.Type.MouseButtonDblClick:
-                self._open_in_explorer()
+                self._open_file_with_default_app()
                 return True
         return super().eventFilter(watched, event)
+
+    def _open_file_with_default_app(self):
+        self.widgetClicked.emit()
+        file_path = os.path.normpath(self.file_path)
+        try:
+            if sys.platform == "win32":
+                os.startfile(file_path)
+            elif sys.platform == "darwin":
+                subprocess.run(["open", file_path], check=False)
+            else:
+                subprocess.run(["xdg-open", file_path], check=False)
+        except Exception:
+            QDesktopServices.openUrl(QUrl.fromLocalFile(file_path))
 
     def _open_in_explorer(self):
         self.widgetClicked.emit()
